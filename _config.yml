@@ -1,0 +1,24 @@
+title: Make Tech Work for Workers
+author: The John Henry Committee
+subtitle: Don't Steamroll AI Adoption — Let Workers Decide
+
+url: "https://www.johnhenry.site"
+baseurl: ""
+
+footer_only_homepage: true
+footer_url: "https://github.com/rhl-bthr"
+footer_text: "Theme by rhl-bthr"
+
+profile-picture: assets/jhc_logo.png
+favicon_location: assets/favicon.ico
+
+permalink: /:year-:month-:day-:title/
+sass:
+    style: compressed
+    sass_dir: css
+
+navbar:
+ - name: "About"
+   link: "about"
+ - name: "Tech Workers Coalition"
+   absolute-link: "https://techworkerscoalition.org"
