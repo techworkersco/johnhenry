@@ -20,5 +20,12 @@ sass:
 navbar:
  - name: "About"
    link: "about"
- - name: "Tech Workers Coalition"
-   absolute-link: "https://techworkerscoalition.org"
+# - name: "Tech Workers Coalition"
+#   absolute-link: "https://techworkerscoalition.org"
+
+
+collections:
+   posts:
+     output: true
+   resources:
+     output: true
