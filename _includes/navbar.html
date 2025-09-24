@@ -1,19 +1,23 @@
 <div class="navbar">
+    <div class="logos">
+        <img class="nav-logo" src="/assets/twc-logo.svg" alt="TWC Logo" />
+        <img class="nav-logo" src="/assets/jhc-logo.png" alt="JHC Logo" />
+    </div>
+
     <a class="site-title" href="{{ site.url }}{{ site.baseurl}}/">{{ site.title }}</a>
 
     <ul class="pull-right">
         {% for x in site.navbar %}
         <li class="pull-left">
             {% if x.absolute-link %}
-                {% assign x-url = x.absolute-link %}
+            {% assign x-url = x.absolute-link %}
             {% else %}
-                {% assign x-url = site.url | append: site.baseurl | append: "/" | append: x.link %}
+            {% assign x-url = site.url | append: site.baseurl | append: "/" | append: x.link %}
             {% endif %}
             <a href="{{ x-url }}">{{ x.name }}</a>
             {% if forloop.last == false %}/{% endif %}
         </li>
         {% endfor %}
     </ul>
-
-    <hr>
 </div>
+<hr>

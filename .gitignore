@@ -8,6 +8,8 @@
 # Ruby
 *.gem
 
+# Jekyll
+_site/
 # Other
 .env
 
