@@ -8,42 +8,13 @@ $max-width: 1100px;
 $med-width: 600px;
 $small-width: 480px;
 
-/* Basic */
-
-body {
-    margin: 0;
-    font-family: "Inconsolata";
-    background-color: #FFFFDD;
-    min-height: 100%;
-}
-
-a {
-    text-decoration: none;
-    color: $accent;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-hr {
-    margin: 5px;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-code {
-    background-color: #d8e7ff;
-    color: #002b72;
-}
-
 /* divs */
 
-.pull-left {
+.float-left {
     float: left;
 }
 
-.pull-right {
+.float-right {
     float: right;
 }
 
@@ -90,8 +61,8 @@ code {
     }
 }
 
-/* index */
-.post-card {
+/* homepage */
+.homepage-post {
     margin-top: 1em;
     margin-bottom: 1em;
 
@@ -103,7 +74,7 @@ code {
     }
 
     .details {
-        @extend .pull-right;
+        @extend .float-right;
         text-align: right;
         margin-left: 20px;
         font-size: 15px;
@@ -118,6 +89,26 @@ code {
     text-align: center;
     margin-top: 10px;
     font-style: italic;
+}
+
+.row {
+    display: flex;
+}
+
+.column {
+    flex: 50%;
+    padding: 10px 30px;
+}
+
+/* Homepage Header Row */
+.column-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 20px;
+
+    hr {
+        margin: 0;
+    }
 }
 
 /* pages */
@@ -315,56 +306,4 @@ code {
     .highlight-blue {
         background-color: #d8e7ff;
     }
-}
-
-table {
-    margin: 15px 0;
-    border-collapse: collapse;
-    width: 100%;
-    padding: 0;
-}
-
-table tr {
-    border-top: 1px solid #cccccc;
-    background-color: white;
-    margin: 0;
-    padding: 0;
-}
-
-table tr:nth-child(2n) {
-    background-color: #f8f8f8;
-}
-
-table tr th {
-    font-weight: bold;
-    border: 1px solid #cccccc;
-    text-align: left;
-    margin: 0;
-    padding: 6px 13px;
-}
-
-table tr td {
-    border: 1px solid #cccccc;
-    text-align: left;
-    margin: 0;
-    padding: 6px 13px;
-}
-
-table tr th :first-child,
-table tr td :first-child {
-    margin: 0;
-}
-
-table tr th :last-child,
-table tr td :last-child {
-    margin: 0;
-}
-
-.row {
-    display: flex;
-}
-
-.column {
-    flex: 50%;
-    padding: 30px;
 }

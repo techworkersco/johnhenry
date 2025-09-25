@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: homepage
 ---
 <div class="row">
   <div class="column">
@@ -7,7 +7,7 @@ layout: default
     {% if post.private == true %}
         {% continue %}
     {% endif %}
-    <div class="post-card">
+    <div class="homepage-post">
         <a class="title" href="{{site.baseurl}}{{ post.url }}">
             {{ post.title }}
         </a>
@@ -41,7 +41,7 @@ layout: default
     {% if post.private == true %}
         {% continue %}
     {% endif %}
-    <div class="post-card">
+    <div class="homepage-post">
         <a class="title" href="{{site.baseurl}}{{ post.url }}">
             {{ post.title }}
         </a>
