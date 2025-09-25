@@ -1,0 +1,7 @@
+{
+  "main.scss": {
+    "jekyll_syntax": "The top two lines are Jekyll front matter (---) to indicate SCSS. Nothing should ever go above these lines.",
+    "organization": "Styles are ordered from top to bottom, matching the order of elements as rendered in homepage.html.",
+    "media_queries": "After the main CSS, there are blocks of media queries handling the same CSS from smallest screen width to largest. Whenever adding CSS to the top section, add corresponding adjustments to the media query sections for final tweaks based on screen widths."
+  }
+}

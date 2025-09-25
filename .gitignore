@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+
+# Logs and temp files
+*.log
+*.tmp
+
+# Ruby
+*.gem
+
+# Jekyll
+_site/
+# Other
+.env
+
+# VS Code
+.vscode/
