@@ -37,10 +37,12 @@ $small-width: 480px;
     }
 
     ul {
-        display: inline-block;
+        display: flex;
+        flex-direction: row;
         margin: 0;
         padding: 5px 0 5px 0;
         margin-left: 20px;
+        gap: 1rem;
     }
 
     li {

@@ -20,6 +20,8 @@ sass:
 navbar:
  - name: "About"
    link: "about"
+ - name: "Contact"
+   link: "contact"
 # - name: "Tech Workers Coalition"
 #   absolute-link: "https://techworkerscoalition.org"
 
