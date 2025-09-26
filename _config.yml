@@ -9,7 +9,7 @@ footer_only_homepage: true
 footer_url: "https://www.johnhenry.site/"
 footer_text: "© 2025 The John Henry Committee"
 
-profile-picture: assets/jhc_logo.png
+profile-picture: assets/jhc-logo.png
 favicon_location: assets/favicon.ico
 
 permalink: /:year-:month-:day-:title/
