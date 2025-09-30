@@ -1,0 +1,6 @@
+<a href="{{ include.url }}" target="_blank" class="about-affiliate">
+  {% if include.img and include.img != '' %}
+    <img class="affiliate-logo" src="{{ include.img }}" alt="{{ include.alt }}" onerror="this.style.display='none'" />
+  {% endif %}
+  <div class="affiliate-label">{{ include.label }}</div>
+</a>

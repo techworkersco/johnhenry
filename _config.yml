@@ -1,3 +1,36 @@
+markdown: kramdown
+kramdown:
+  parse_block_html: true
+affiliates:
+  - name: Amazon Employees for Climate Justice
+    url: https://www.amazonclimatejustice.org/
+    img: https://images.squarespace-cdn.com/content/v1/65681f099d7c3d48feb86a5f/8d41f981-850c-44cc-9960-ec0e4c2d4aed/AECJ_logo_transparent.png
+    alt: AECJ Logo
+  - name: Times Tech Guild
+    url: https://nytimesguild.org/
+    img: /assets/nytimesguild-logo.jpeg
+    alt: Times Tech Guild Logo
+  - name: Turkopticon
+    url: https://turkopticon.net/
+    img: /assets/turkopticon-logo.jpeg
+    alt: Turkopticon Logo
+  - name: Code-CWA
+    url: https://code-cwa.org/
+    img: /assets/code-cwa-logo.png
+    alt: Code-CWA Logo
+  - name: DAIR
+    url: https://www.dair-institute.org/
+    img: /assets/dair-logo.svg
+    alt: DAIR Logo
+  - name: Tech Workers Coalition
+    url: https://techworkerscoalition.org
+    img: /assets/twc-logo.svg
+    alt: Tech Workers Coalition Logo
+  - name: Collective Action in Tech
+    url: https://collectiveaction.tech/
+    img: /assets/cait-logo.png
+    alt: Collective Action in Tech Logo
+
 title: Make Tech Work for Workers
 author: The John Henry Committee
 subtitle: Don't Steamroll AI Adoption — Let Workers Decide
