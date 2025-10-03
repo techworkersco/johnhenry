@@ -31,6 +31,7 @@ $small-width: 480px;
     display: flex;
     align-items: center;
     gap: 1rem;
+    font-family: 'Inconsolata';
 
     .logos {
         display: flex;
@@ -79,6 +80,7 @@ $small-width: 480px;
             color: #272727;
             display: inline-block;
             font-size: 30px;
+            font-family: 'Inconsolata';
         }
         
         .details {
@@ -99,6 +101,7 @@ $small-width: 480px;
     .subtitle, .excerpt {
         color: #555555;
         text-decoration-color: #555555;
+        font-family: 'Inconsolata';
     }
 
     .resource {
@@ -114,7 +117,9 @@ $small-width: 480px;
             color: #272727;
             display: inline-block;
             font-size: 24px;
+            font-family: 'Inconsolata';
         }
+
         .homepage-post-image {
             width: 4rem;
             height: auto;
@@ -151,6 +156,7 @@ $small-width: 480px;
     font-size: 1.5rem;
     font-weight: bold;
     margin-top: 20px;
+    font-family: 'Inconsolata';
 
     hr {
         margin: 0;
@@ -164,6 +170,7 @@ $small-width: 480px;
     font-size: xx-large;
     font-weight: bold;
     line-height: 2;
+    font-family: 'Inconsolata';
 }
 
 .page-subtitle {
