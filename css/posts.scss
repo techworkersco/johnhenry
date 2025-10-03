@@ -1,0 +1,29 @@
+---
+---
+
+/* General post styles */
+#bingo-card-thumbnail {
+  margin: -6px auto 0;
+}
+
+#bingo-card {
+  display: block;
+  width: 400px;
+  height: auto;
+  margin: 0 0 20px 40px;
+  float: right;
+}
+
+/* Media queries for tablet and mobile */
+@media (max-width: 1200px) {
+  #bingo-card {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 700px) {
+  #bingo-card {
+    max-width: 250px;
+    margin: 1rem auto;
+  }
+}

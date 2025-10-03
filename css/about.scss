@@ -1,0 +1,87 @@
+---
+---
+
+/* Full Screen Layout */
+.profile-picture {
+  position: relative;
+  top: -60px;
+}
+
+/* Affiliates grid layout */
+.about-affiliates {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1rem 2rem;
+  margin: 2rem 0;
+
+  .about-affiliate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .affiliate-logo {
+      height: 64px;
+      margin-bottom: 10px;
+      vertical-align: middle;
+    }
+
+    .affiliate-label {
+      vertical-align: middle;
+      font-size: 1em;
+      font-weight: bold;
+      width: 10rem;
+    }
+  }
+}
+
+/* Media queries for tablet and mobile */
+@media (max-width: 800px) {
+  .profile-picture {
+    top: -16px;
+  }
+
+  .about-affiliates {
+    .about-affiliate {
+      .affiliate-logo {
+        height: 48px;
+        margin-bottom: 10px;
+        vertical-align: middle;
+      }
+
+      .affiliate-label {
+        font-size: .8em;
+        width: 8rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .profile-picture {
+    top: -10px;
+  }
+  .about-affiliates {
+    grid-template-columns: 1fr;
+    gap: 0;
+
+    .about-affiliate {
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: left;
+      min-height: 48px;
+
+      .affiliate-logo {
+        height: 32px;
+        max-width: 80px;
+        align-self: center;
+      }
+
+      .affiliate-label {
+        width: auto;
+        font-size: 1rem;
+      }
+    }
+  }
+}
