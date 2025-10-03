@@ -67,6 +67,8 @@ $small-width: 480px;
 /* homepage */
 .homepage-post {
     margin-bottom: 1em;
+    font-family: 'Inconsolata';
+
     &:not(:first-child) {
         margin-top: 1em;
     }
@@ -96,12 +98,15 @@ $small-width: 480px;
             font-size: 0.9em;
         }
     }
-    
-
+        
     .subtitle, .excerpt {
         color: #555555;
         text-decoration-color: #555555;
-        font-family: 'Inconsolata';
+    }
+
+    .excerpt {
+        font-family: 'Open Sans';
+        line-height: 1.65;
     }
 
     .resource {
