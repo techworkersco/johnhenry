@@ -70,6 +70,10 @@ $small-width: 480px;
         margin-top: 1em;
     }
 
+    .post-header {
+        display: flex;
+        justify-content: space-between;
+    }
     .title {
         max-width: 500px;
         color: #272727;
@@ -84,7 +88,7 @@ $small-width: 480px;
         font-size: 15px;
     }
 
-    .subtitle {
+    .subtitle, .excerpt {
         max-width: 500px;
         color: #555555;
         text-decoration-color: #555555;
