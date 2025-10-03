@@ -31,6 +31,7 @@ $small-width: 480px;
     display: flex;
     align-items: center;
     gap: 1rem;
+    font-family: 'Inconsolata';
 
     .logos {
         display: flex;
@@ -66,6 +67,8 @@ $small-width: 480px;
 /* homepage */
 .homepage-post {
     margin-bottom: 1em;
+    font-family: 'Inconsolata';
+
     &:not(:first-child) {
         margin-top: 1em;
     }
@@ -73,25 +76,37 @@ $small-width: 480px;
     .post-header {
         display: flex;
         justify-content: space-between;
-    }
-    .title {
-        max-width: 500px;
-        color: #272727;
-        display: inline-block;
-        font-size: 30px;
-    }
 
-    .details {
-        @extend .float-right;
-        text-align: right;
-        margin-left: 20px;
-        font-size: 15px;
-    }
+        .title {
+            max-width: 500px;
+            color: #272727;
+            display: inline-block;
+            font-size: 30px;
+            font-family: 'Inconsolata';
+        }
+        
+        .details {
+            @extend .float-right;
+            text-align: right;
+            margin: 6px 0 0 10px;
+            font-size: 15px;
+            min-width: 150px;
+            color: #333;
+        }
 
+        .post-tags {
+            font-size: 0.9em;
+        }
+    }
+        
     .subtitle, .excerpt {
-        max-width: 500px;
         color: #555555;
         text-decoration-color: #555555;
+    }
+
+    .excerpt {
+        font-family: 'Open Sans';
+        line-height: 1.65;
     }
 
     .resource {
@@ -107,7 +122,9 @@ $small-width: 480px;
             color: #272727;
             display: inline-block;
             font-size: 24px;
+            font-family: 'Inconsolata';
         }
+
         .homepage-post-image {
             width: 4rem;
             height: auto;
@@ -144,6 +161,7 @@ $small-width: 480px;
     font-size: 1.5rem;
     font-weight: bold;
     margin-top: 20px;
+    font-family: 'Inconsolata';
 
     hr {
         margin: 0;
@@ -157,6 +175,7 @@ $small-width: 480px;
     font-size: xx-large;
     font-weight: bold;
     line-height: 2;
+    font-family: 'Inconsolata';
 }
 
 .page-subtitle {
