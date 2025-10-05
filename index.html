@@ -3,7 +3,7 @@ layout: homepage
 ---
 <div class="row">
     <div class="column">
-        {% for post in site.posts reversed limit:5 %}
+        {% for post in site.posts limit:5 %}
         {% if post.private == true %}
         {% continue %}
         {% endif %}
@@ -12,7 +12,7 @@ layout: homepage
                 <a class="title" href="{{site.baseurl}}{{ post.url }}">
                     {{ post.title }}
                 </a>
-                
+
                 <div class="details">
                     <b>{{ post.date | date: "%d %B %Y" }}</b>
                     <br>

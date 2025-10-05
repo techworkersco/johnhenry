@@ -2,6 +2,8 @@
 layout: post
 title: Introducing the John Henry Committee
 tags: [meta]
+author: Committe
+date: 2025-09-15
 ---
 
 The John Henry Committee is a collection of tech workers and
