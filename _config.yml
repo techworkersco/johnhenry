@@ -31,16 +31,16 @@ affiliates:
     img: /assets/cait-logo.png
     alt: Collective Action in Tech Logo
 
-title: Make Tech Work for Workers
-author: The John Henry Committee
+title: WorkersDecide.tech — Make Tech Work for Workers
+author: Tech Workers Decide
 subtitle: Don't Steamroll AI Adoption — Let Workers Decide
 
-url: "https://www.johnhenry.site"
+url: "https://www.workersdecide.tech"
 baseurl: ""
 
 footer_only_homepage: true
-footer_url: "https://www.johnhenry.site/"
-footer_text: "© 2025 The John Henry Committee"
+footer_url: "https://www.workersdecide.tech/"
+footer_text: "© 2025 workersdecide.tech"
 
 profile-picture: assets/jhc-logo.png
 favicon_location: assets/favicon.ico
