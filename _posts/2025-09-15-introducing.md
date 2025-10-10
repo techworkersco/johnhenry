@@ -6,7 +6,8 @@ author: Committee
 date: 2025-09-15
 ---
 
-WorkersDecide.tech is the product of a collection of tech workers and
+WorkersDecide.tech is the product of the AI Chaos Prevention Committee
+-- a collection of tech workers and
 organizers drawn from a range of groups and organizations, including [Amazon Employees
 for Climate Justice](https://www.amazonclimatejustice.org/), the
 [Times Tech Guild](https://nytimesguild.org/),
