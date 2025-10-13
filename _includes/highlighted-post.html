@@ -1,0 +1,35 @@
+{% for post in site.resources limit:20 %}
+{% if post.isHighlighted == true %}
+<div class="homepage-post highlighted-post">
+  <div class="row">
+    <div class="column">
+      <a class="title" href="{{site.baseurl}}{{ post.url }}">
+        <div class="post-header">
+          {{ post.title }}
+        </div>
+        {% if post.subtitle and post.subtitle != '' %}
+        <div class="subtitle">
+          {{ post.highlight-promo }}
+        </div>
+      </a>
+      {% endif %}
+      {% if post.tagline and post.tagline != '' %}
+      <div class="excerpt">
+        {{ post.tagline }}
+      </div>
+      {% endif %}
+    </div>
+    <div class="column">
+
+      {% if post.image and post.image != '' %}
+      <div class="highlighted-post-image-container">
+        
+        <img class="highlighted-post-image" src="{{ post.image }}" alt="{{ post.title }} image"
+        onerror="this.style.display='none'" />
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endfor %}
