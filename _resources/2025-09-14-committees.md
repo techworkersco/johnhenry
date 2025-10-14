@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Implementation Committees, A Workplace Organizing Demand around AI
-tags: resource
+tags: resources
 author: Gary
 date: 2025-09-14
 ---
