@@ -6,17 +6,11 @@
 <body>
     <div class="container">
         {% include navbar.html %}
-        <div class="page-title" style="font-size:x-large">
+        <div class="page-title">
             {{page.title}}
 	    </div>
         {% include highlighted-post.html %}
-        <div class="content">
-            <div class="row">
-                <div class="column column-header">Resources<hr /></div>
-                <div class="column column-header">Articles<hr /></div>
-            </div>
-            {{ content }}
-        </div>
+        {{ content }}
         {% include footer.html %}
     </div>
 </body>

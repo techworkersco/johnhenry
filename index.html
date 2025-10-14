@@ -1,12 +1,43 @@
 ---
 layout: homepage
-title: Frustrated by your employer's generative AI policies? We're here to help you organize!
+title: Frustrated by your employer's generative AI policies? We're here to help you organize! We're uniting tech workers who recognize the consequences of employers rolling out AI mandates without the input of their workers. These initiatives are an attack on our working conditions — leading to layoffs, workload manipulation, forced attrition, and degrading the quality of the products of our labor. We know from our experience as organizers that workers are not helpless in the face of these top-down initiatives — we have the tools to demand our seat at the table, and to have our say in how technology is implemented and deployed in our workplaces.
 ---
-<div class="row">
-    <div class="column">
-        {% for post in site.resources reversed limit:5 %}
+<div class="content">
+    <div class="row lt800">
+        <div class="column column-header">Latest Articles<hr /></div>
+    </div>
+    <div class="row lt800">
+        {% for post in site.posts limit:2 %}
+        {% if post.private == true %}
+        {% continue %}
+        {% endif %}
+        <div class="column articles">
+            <div class="homepage-post articles">
+                <a href="{{ site.baseurl }}{{ post.url }}">
+                    <div>
+                        <div class="title">{{ post.title }}</div>
+                        <div class="subtitle">{{ post.subtitle }}</div>
+                        <div class="post-date">{{ post.date | date: "%d %B %Y" }}</div>
+                    </div>
+                    {% if post.image %}
+                    <img id="{{ post.homepageImageId }}" src="{{ post.image }}" alt="{{ post.title }}"
+                        class="homepage-post-image" />
+                    {% endif %}
+                </a>
+            </div>
+        </div>
+        <hr class="lt650"/>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="column column-header resources">Resources<hr /></div>
+        <div class="column column-header articles gt800">Articles<hr /></div>
+    </div>
+    <div class="row">
+        <div class="column resources">
+            {% for post in site.resources reversed limit:5 %}
             {% if post.private == true %}
-                {% continue %}
+            {% continue %}
             {% endif %}
             <div class="homepage-post">
                 <div class="post-header">
@@ -20,7 +51,8 @@ title: Frustrated by your employer's generative AI policies? We're here to help 
                         {% if post.tags %}
                         [
                         {% for tag in post.tags %}
-                        <a class="post-tags" href="{{ site.baseurl }}/tags/#{{ tag }}">{{ tag }}</a>{% if forloop.last == false %},{% endif %}
+                        <a class="post-tags" href="{{ site.baseurl }}/tags/#{{ tag }}">{{ tag }}</a>{% if forloop.last
+                        == false %},{% endif %}
                         {% endfor %}
                         ]
                         {% endif %}
@@ -37,28 +69,30 @@ title: Frustrated by your employer's generative AI policies? We're here to help 
             {% if forloop.last == false %}
             <hr>
             {% endif %}
-        {% endfor %}
-    </div>
-    <div class="column">
-        {% for post in site.posts limit:5 %}
+            {% endfor %}
+        </div>
+        <div class="column articles gt800">
+            {% for post in site.posts limit:5 %}
             {% if post.private == true %}
-                {% continue %}
+            {% continue %}
             {% endif %}
-            <div class="homepage-post">
-                <a class="resource" href="{{ site.baseurl }}{{ post.url }}">
+            <div class="homepage-post articles">
+                <a href="{{ site.baseurl }}{{ post.url }}">
                     <div>
                         <div class="title">{{ post.title }}</div>
                         <div class="subtitle">{{ post.subtitle }}</div>
                         <div class="post-date">{{ post.date | date: "%d %B %Y" }}</div>
                     </div>
                     {% if post.image %}
-                    <img id="{{ post.homepageImageId }}" src="{{ post.image }}" alt="{{ post.title }}" class="homepage-post-image" />
+                    <img id="{{ post.homepageImageId }}" src="{{ post.image }}" alt="{{ post.title }}"
+                        class="homepage-post-image" />
                     {% endif %}
                 </a>
             </div>
             {% if forloop.last == false %}
             <hr>
             {% endif %}
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 </div>
