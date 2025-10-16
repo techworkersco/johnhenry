@@ -3,15 +3,96 @@ layout: default
 permalink: /tags/
 ---
 
-<ul>
+<ul class="tags-list">
     {% for tag in site.tags %}
-        <li id="{{ tag[0] }}">
-            <b>{{ tag[0] }}</b>
-        </li>
+    <li id="{{ tag[0] }}">
+        <b>{{ tag[0] }}</b>
+        <br>
         {% for post in tag[1] %}
-            {{ post.date | date:"%Y-%m-%d" }} &raquo; <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-            <br>
+        {{ post.date | date:"%Y-%m-%d" }} &raquo; <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+        <br>
+        {% endfor %}
+    </li>
+    <br>
+    {% endfor %}
+    <br>
+    <li id="resources"><b>Resources</b><br>
+        {% for resource in site.resources %}
+        {% if resource.tags contains "resources" %}
+        {{ resource.date | date:"%Y-%m-%d" }} &raquo; <a href="{{ site.baseurl }}{{ resource.url }}">{{ resource.title
+            }}</a>
+        <br>
+        {% endif %}
         {% endfor %}
         <br>
-    {% endfor %}
+    </li>
+    <li id="articles">
+        <b>Articles</b><br>
+        {% for tag in site.tags %}
+        <section id="{{ tag[0] }}">
+            <b>{{ tag[0] }}</b>
+            <br>
+            {% for post in tag[1] %}
+            {{ post.date | date:"%Y-%m-%d" }} &raquo; <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+            <br>
+            {% endfor %}
+        </section>
+        <br>
+        {% endfor %}
+    </li>
 </ul>
+
+<script>
+    // This function shows/hides tag sections based on the URL fragment (hash)
+    function showTagSection() {
+        var hash = window.location.hash.replace('#', ''); // Get the fragment after '#'
+        var sections = document.querySelectorAll('li[id]'); // All tag sections (li elements with id)
+
+        if (!hash) {
+            // If no hash, show only 'articles' and 'resources', hide all other tag sections
+            sections.forEach(function (section) {
+                if (section.id === 'articles' || section.id === 'resources') {
+                    section.style.display = '';
+                    // Show any sibling content (e.g., <br>) after this section
+                    var next = section.nextElementSibling;
+                    while (next && next.tagName !== 'LI') {
+                        next.style.display = '';
+                        next = next.nextElementSibling;
+                    }
+                } else {
+                    section.style.display = 'none';
+                    // Hide any sibling content after this section
+                    var next = section.nextElementSibling;
+                    while (next && next.tagName !== 'LI') {
+                        next.style.display = 'none';
+                        next = next.nextElementSibling;
+                    }
+                }
+            });
+            return;
+        }
+        // If there is a hash, show only the matching section, hide all others
+        sections.forEach(function (section) {
+            if (section.id !== hash && hash) {
+                section.style.display = 'none';
+                var next = section.nextElementSibling;
+                while (next && next.tagName !== 'LI') {
+                    next.style.display = 'none';
+                    next = next.nextElementSibling;
+                }
+            } else {
+                section.style.display = '';
+                var next = section.nextElementSibling;
+                while (next && next.tagName !== 'LI') {
+                    next.style.display = '';
+                    next = next.nextElementSibling;
+                }
+            }
+        });
+    }
+
+    // Run on initial page load
+    document.addEventListener("DOMContentLoaded", showTagSection);
+    // Run whenever the hash changes (user navigates to a different tag)
+    window.addEventListener("hashchange", showTagSection);
+</script>
