@@ -68,8 +68,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Set the main container class for style switching
     var main = document.getElementById('bingo-main');
+    var showBgCheckbox = document.getElementById('showBackground');
+    var showBg = showBgCheckbox.checked;
+    // If useLessInk is selected, auto-deselect showBg ONCE, but allow user to re-check it
+    if (useLessInk && showBg && !showBgCheckbox._autoDeselected) {
+      showBgCheckbox.checked = false;
+      showBgCheckbox._autoDeselected = true;
+      showBg = false;
+    } else if (!useLessInk) {
+      if (showBgCheckbox._autoDeselected) {
+        showBgCheckbox.checked = true;
+      }
+      showBgCheckbox._autoDeselected = false;
+    }
+    showBg = showBgCheckbox.checked;
     if (main) {
-      main.className = style;
+      main.className = style + (showBg ? '' : ' hide-bg');
     }
 
     // Fill in the bingo grid
@@ -111,123 +125,45 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   document.getElementById('printBingo').addEventListener('click', function() {
-    // Get options
     var style = document.querySelector('input[name="cardStyle"]:checked').value;
-    var useLessInk = style === 'useLessInk';
-    var blackWhite = style === 'blackWhite';
-    var fullColor = style === 'fullColor';
     var numCards = Math.max(1, Math.min(40, parseInt(document.getElementById('numCards').value) || 1));
+    var main = document.getElementById('bingo-main');
+    if (main) main.className = style;
 
-    // Prepare bingo cards HTML
-    var cardsHtml = '';
-    for (var cardIdx = 0; cardIdx < numCards; cardIdx++) {
-      // Shuffle bingoText for each card
-      var phrases = bingoText.slice();
-      for (var i = phrases.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = phrases[i];
-        phrases[i] = phrases[j];
-        phrases[j] = temp;
-      }
-      // Build squares
-      var squares = [];
-      var phraseIdx = 0;
-      for (var r = 0; r < bingoSize; r++) {
-        squares[r] = [];
-        for (var c = 0; c < bingoSize; c++) {
-          if (r === 2 && c === 2) {
-            squares[r][c] = { type: 'center', img: '/assets/hammer-logo.png', alt: 'Hammer Logo' };
-          } else {
-            squares[r][c] = { type: 'text', text: phrases[phraseIdx++] };
-          }
-        }
-      }
-      // Card HTML
-      var cardHtml = '';
-      cardHtml += '<section class="bingo-card' + (useLessInk ? '' : ' full-bg') + ' print-card" aria-label="Bingo Card">';
-      // Letters background SVG
-      if (!useLessInk && !blackWhite) {
-        cardHtml += '<img src="' + (fullColor ? bingo_letters_bgs : bingo_letters_printer_friendly) + '" alt="Bingo Letters Background" class="bingo-letters-bg">';
-      }
-      // Bingo title
-      cardHtml += '<img src="' + bingo_title + '" alt="Workplace AI Implementation Bingo" class="bingo-title">';
-      // Bingo grid
-      cardHtml += '<table role="grid" aria-label="Bingo Grid" class="bingo-grid">';
-      for (var rr = 0; rr < bingoSize; rr++) {
-        cardHtml += '<tr>';
-        for (var cc = 0; cc < bingoSize; cc++) {
-          cardHtml += '<td class="bingo-square">';
-          if (squares[rr][cc].type === 'center') {
-            cardHtml += '<img src="' + squares[rr][cc].img + '" alt="' + squares[rr][cc].alt + '" class="center-img">';
-          } else {
-            cardHtml += squares[rr][cc].text;
-          }
-          cardHtml += '</td>';
-        }
-        cardHtml += '</tr>';
-      }
-      cardHtml += '</table>';
-      // Footer
-      if (!useLessInk) {
-        cardHtml += '<img src="' + bingo_footer + '" alt="Bingo Card Footer" class="bingo-footer">';
-      }
-      cardHtml += '</section>';
-      cardsHtml += cardHtml;
+    // Prepare print window
+    var printWindow = window.open('', '_blank');
+    // Add bingo-print-mode class to body and link to bingo.css
+    var printCssLink = '<link rel="stylesheet" href="/css/bingo.css">';
+    var printBodyClass = ' class="bingo-print-mode"';
+
+    // Clone the current bingo card
+    var cardElem = document.querySelector('.bingo-card');
+    if (!cardElem) return;
+    var cardsHtml = [];
+    for (var i = 0; i < numCards; i++) {
+      // Generate a new randomized card for each print
+      renderBingoCards();
+      var clone = cardElem.cloneNode(true);
+      clone.classList.add('print-card');
+      // Preserve all classes, including full-bg, when cloning for print
+      clone.className = cardElem.className + ' ' + style + ' print-card';
+      // Wrap each card in a print-card-rotator div
+      cardsHtml.push('<div class="print-card-rotator">' + clone.outerHTML + '</div>');
     }
 
-    // Print window HTML and styles
-    var printWindow = window.open('', '_blank');
-    var printStyles = `
-      <style>
-      body { background: #fff !important; margin: 0; padding: 0; }
-      .print-cards-container { width: 100vw; min-height: 100vh; }
-      .print-page { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 24pt 0; page-break-after: always; }
-      .print-card-outer { width: 468pt; height: 324pt; display: flex; justify-content: center; align-items: center; margin: 12pt 0; position: relative; overflow: visible; }
-      .print-card {
-        width: 324pt; height: 468pt;
-        box-sizing: border-box;
-        border: 2pt solid #222;
-        border-radius: 12pt;
-        overflow: visible;
-        margin: 0;
-        position: absolute;
-        left: 0; top: 0;
-        background: #fff;
-        page-break-inside: avoid;
-        transform-origin: center center;
-        display: block;
-      }
-      .bingo-title { display: block; margin: 18pt auto 8pt auto; width: 90%; height: auto; z-index: 3; }
-      .bingo-letters-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100pt; z-index: 2; }
-      .bingo-footer { width: 100%; height: 32pt; position: absolute; bottom: 0; left: 0; z-index: 6; }
-      .bingo-grid { width: 95%; margin: 0 30pt; background: transparent; border-collapse: collapse; z-index: 4; }
-      .bingo-square { width: 64pt; height: 64pt; background: #fff; border: 1.5pt solid #222; text-align: center; vertical-align: middle; font-size: 10pt; font-family: Inconsolata, Arial, sans-serif; padding: 0 6pt; overflow-wrap: break-word; position: relative; z-index: 5; box-sizing: border-box; word-break: break-word; white-space: normal; }
-      .center-img { width: 36pt; height: 36pt; display: block; margin: 0 auto; }
-      @media print {
-        body { background: #fff !important; }
-        .print-cards-container { page-break-inside: avoid; }
-        .print-page { page-break-after: always; }
-        .print-card { page-break-inside: avoid; }
-      }
-      </style>
-    `;
-
-    // Layout: 2 cards per page, each rotated 90deg
+    // Layout: 2 cards per page
     var containerHtml = '<div class="print-cards-container">';
-    var cardSections = cardsHtml.split('</section>');
     for (var i = 0; i < numCards; i += 2) {
       containerHtml += '<div class="print-page">';
-      // Top card
-      containerHtml += '<div class="print-card-outer"><div class="print-card">' + cardSections[i].replace('<section', '<section').replace('</section>', '') + '</section></div></div>';
-      // Bottom card (if exists)
+      containerHtml += cardsHtml[i] || '';
       if (i + 1 < numCards) {
-        containerHtml += '<div class="print-card-outer"><div class="print-card">' + cardSections[i + 1].replace('<section', '<section').replace('</section>', '') + '</section></div></div>';
+        containerHtml += cardsHtml[i + 1];
       }
       containerHtml += '</div>';
     }
     containerHtml += '</div>';
 
-    printWindow.document.write('<!DOCTYPE html><html><head><title>Print Bingo Cards</title>' + printStyles + '</head><body>' + containerHtml + '</body></html>');
+    printWindow.document.write('<!DOCTYPE html><html><head><title>Print Bingo Cards</title>' + printCssLink + '</head><body' + printBodyClass + '>' + containerHtml + '</body></html>');
     printWindow.document.close();
     printWindow.focus();
     setTimeout(function() { printWindow.print(); }, 500);
