@@ -139,17 +139,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // Clone the current bingo card
     var cardElem = document.querySelector('.bingo-card');
     if (!cardElem) return;
+    var originalClass = cardElem.className;
     var cardsHtml = [];
     for (var i = 0; i < numCards; i++) {
-      // Generate a new randomized card for each print
+      // For each print card, set full-bg class based on current showBackground state
+      var showBg = document.getElementById('showBackground').checked;
+      if (showBg) {
+        cardElem.classList.add('full-bg');
+      } else {
+        cardElem.classList.remove('full-bg');
+      }
       renderBingoCards();
       var clone = cardElem.cloneNode(true);
-      clone.classList.add('print-card');
-      // Preserve all classes, including full-bg, when cloning for print
       clone.className = cardElem.className + ' ' + style + ' print-card';
-      // Wrap each card in a print-card-rotator div
       cardsHtml.push('<div class="print-card-rotator">' + clone.outerHTML + '</div>');
     }
+    // Restore the original class after print staging so toggling works again
+    cardElem.className = originalClass;
 
     // Layout: 2 cards per page
     var containerHtml = '<div class="print-cards-container">';
