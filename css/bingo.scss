@@ -1,0 +1,119 @@
+---
+---
+
+/* Bingo Card Generator Styles */
+.bingo-cards-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+#bingo-main {
+  display: flex;
+  justify-content: center;
+}
+.bingo-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 420px;
+  height: 540px;
+  background: #fff;
+  box-sizing: border-box;
+  border: 2px solid #222;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.bingo-card.full-bg {
+  background: url('/assets/bingo-assets/bingo-bg.svg') center/cover;
+}
+.bingo-title {
+  display: block;
+  margin-top: 10px;
+  width: 90%;
+  height: auto;
+  z-index: 3;
+}
+
+    .letter-bg-color path {
+      fill: red;
+    }
+.bingo-letters-container {
+  position: relative;
+  width: 100%;
+  height: 90px;
+  margin: 0;
+  padding: 0;
+
+  .bingo-letters-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+
+
+  }
+  .bingo-letters {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 3;
+  }
+}
+
+.bingo-grid {
+  width: 95%;
+  margin: 10px 10px 0;
+  background: transparent;
+  border-collapse: collapse;
+  z-index: 4;
+}
+.bingo-square {
+  width: 80px;
+  height: 80px;
+  background: #fff;
+  border: 1.5px solid #222;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 8pt;
+  font-family: Open Sans;
+  padding: 0 6px;
+  overflow-wrap: break-word;
+  position: relative;
+  z-index: 5;
+  box-sizing: border-box;
+  word-break: break-word;
+  white-space: normal;
+}
+.bingo-square .center-img {
+  width: 48px;
+  height: 48px;
+  display: block;
+  margin: 0 auto;
+}
+
+.bingo-footer {
+  width: 100%;
+  height: 32px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 6;
+}
+
+
+@media print {
+  body {
+    background: #fff !important;
+  }
+  .bingo-cards-container {
+    page-break-inside: avoid;
+  }
+  .bingo-card {
+    page-break-inside: avoid;
+  }
+}

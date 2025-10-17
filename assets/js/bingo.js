@@ -16,7 +16,7 @@ const bingoText = [
   "Everyone else is using AI, we can't fall behind",
   "There are ways to use AI ethically",
   "Are you some sort of Luddite?",
-  "Its workers' job to review bad AI output",
+  "It's workers' job to review bad AI output",
   "If you don't learn AI, you won't grow your career",
   "AI is what we need to excite investors",
   "Funders/the board are asking us to use it",
@@ -58,221 +58,49 @@ function getRandomInt(max) {
 // Bingo Card Generator UI and Logic
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Create options UI
-  let optionsDiv = document.getElementById('bingo-options');
-  if (!optionsDiv) {
-    optionsDiv = document.createElement('div');
-    optionsDiv.id = 'bingo-options';
-    optionsDiv.style.marginBottom = '1.5rem';
-    optionsDiv.innerHTML = `
-      <form id="bingo-options-form" style="display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;">
-        <fieldset style="border:none;display:flex;gap:1rem;align-items:center;">
-          <legend style="font-weight:bold;">Card Style:</legend>
-          <label><input type="radio" name="cardStyle" id="fullColor" value="fullColor" checked> Full Color</label>
-          <label><input type="radio" name="cardStyle" id="blackWhite" value="blackWhite"> Black & White</label>
-          <label><input type="radio" name="cardStyle" id="printerFriendly" value="printerFriendly"> Printer-friendly</label>
-        </fieldset>
-        <label>Number of cards to print: <input type="number" id="numCards" min="1" max="40" value="1" style="width:3em;"></label>
-        <button type="button" id="printBingo">Print Bingo Cards</button>
-      </form>
-    `;
-    // Insert optionsDiv just above the rendered card, below other page content
-    let mainContent = document.querySelector('main');
-    if (mainContent) {
-      mainContent.parentNode.insertBefore(optionsDiv, mainContent.nextSibling);
-    } else {
-      document.body.appendChild(optionsDiv);
-    }
-  }
-
-  // Add CSS styles for bingo card and grid
-  function injectBingoStyles() {
-    if (document.getElementById('bingo-card-styles')) return;
-    const style = document.createElement('style');
-    style.id = 'bingo-card-styles';
-    style.textContent = `
-      .bingo-cards-container {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 2rem;
-        aria-label: Printable Bingo Cards;
-      }
-      .bingo-card {
-        position: relative;
-        width: 420px;
-        height: 540px;
-        background: #fff;
-        box-sizing: border-box;
-        border: 2px solid #222;
-        border-radius: 12px;
-        overflow: hidden;
-        margin-bottom: 2rem;
-      }
-      .bingo-card.full-bg {
-        background: url('/assets/bingo-assets/bingo-bg.svg') center/cover;
-      }
-      .bingo-title {
-        display: block;
-        margin: 18px auto 8px auto;
-        width: 90%;
-        height: auto;
-        z-index: 3;
-      }
-      .bingo-letters-bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100px;
-        z-index: 2;
-      }
-      .bingo-footer {
-        width: 100%;
-        height: 32px;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        z-index: 6;
-      }
-      .bingo-grid {
-        width: 95%;
-        margin: 0 30px;
-        background: transparent;
-        border-collapse: collapse;
-        z-index: 4;
-      }
-      .bingo-square {
-        width: 80px;
-        height: 80px;
-        background: #fff;
-        border: 1.5px solid #222;
-        text-align: center;
-        vertical-align: middle;
-        font-size: 1rem;
-        font-family: Inconsolata, Arial, sans-serif;
-        padding: 0 6px;
-        overflow-wrap: break-word;
-        position: relative;
-        z-index: 5;
-        box-sizing: border-box;
-        word-break: break-word;
-        white-space: normal;
-      }
-      .bingo-square .center-img {
-        width: 48px;
-        height: 48px;
-        display: block;
-        margin: 0 auto;
-      }
-      @media print {
-        body {
-          background: #fff !important;
-        }
-        .bingo-cards-container {
-          page-break-inside: avoid;
-        }
-        .bingo-card {
-          page-break-inside: avoid;
-        }
-      }
-    `;
-    document.head.appendChild(style);
-  }
-
   // Main render function
   function renderBingoCards() {
-    injectBingoStyles();
     // Get options
     const style = document.querySelector('input[name="cardStyle"]:checked').value;
-    const printerFriendly = style === 'printerFriendly';
+    const useLessInk = style === 'useLessInk';
     const blackWhite = style === 'blackWhite';
     const fullColor = style === 'fullColor';
-    const numCards = Math.max(1, Math.min(40, parseInt(document.getElementById('numCards').value) || 1));
 
-    // Remove old cards
-    document.querySelectorAll('.bingo-cards-container').forEach(e => e.remove());
-
-    // Create container
-    const container = document.createElement('main');
-    container.className = 'bingo-cards-container';
-    container.setAttribute('aria-label', 'Printable Bingo Cards');
-
-    for (let cardIdx = 0; cardIdx < 1; cardIdx++) {
-      // Shuffle bingoText for each card
-      const phrases = [...bingoText];
-      for (let i = phrases.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [phrases[i], phrases[j]] = [phrases[j], phrases[i]];
-      }
-      // Build squares
-      let squares = [];
-      let phraseIdx = 0;
-      for (let r = 0; r < bingoSize; r++) {
-        squares[r] = [];
-        for (let c = 0; c < bingoSize; c++) {
-          if (r === 2 && c === 2) {
-            squares[r][c] = { type: 'center', img: '/assets/hammer-logo.png', alt: 'Hammer Logo' };
-          } else {
-            squares[r][c] = { type: 'text', text: phrases[phraseIdx++] };
-          }
-        }
-      }
-      // Card section
-      const cardSection = document.createElement('section');
-      cardSection.className = 'bingo-card' + (printerFriendly ? '' : ' full-bg');
-      cardSection.setAttribute('aria-label', 'Bingo Card');
-      // Letters background SVG
-      if (!printerFriendly && !blackWhite) {
-        const lettersBg = document.createElement('img');
-        lettersBg.src = fullColor ? bingo_letters_bgs : bingo_letters_printer_friendly;
-        lettersBg.alt = 'Bingo Letters Background';
-        lettersBg.className = 'bingo-letters-bg';
-        cardSection.appendChild(lettersBg);
-      }
-      // Bingo title
-      const titleImg = document.createElement('img');
-      titleImg.src = bingo_title;
-      titleImg.alt = 'Workplace AI Implementation Bingo';
-      titleImg.className = 'bingo-title';
-      cardSection.appendChild(titleImg);
-      // Bingo grid
-      const table = document.createElement('table');
-      table.setAttribute('role', 'grid');
-      table.setAttribute('aria-label', 'Bingo Grid');
-      table.className = 'bingo-grid';
-      for (let r = 0; r < bingoSize; r++) {
-        const tr = document.createElement('tr');
-        for (let c = 0; c < bingoSize; c++) {
-          const td = document.createElement('td');
-          td.className = 'bingo-square';
-          if (squares[r][c].type === 'center') {
-            const img = document.createElement('img');
-            img.src = squares[r][c].img;
-            img.alt = squares[r][c].alt;
-            img.className = 'center-img';
-            td.appendChild(img);
-          } else {
-            td.textContent = squares[r][c].text;
-          }
-          tr.appendChild(td);
-        }
-        table.appendChild(tr);
-      }
-      cardSection.appendChild(table);
-      // Footer
-      if (!printerFriendly) {
-        const footerImg = document.createElement('img');
-        footerImg.src = bingo_footer;
-        footerImg.alt = 'Bingo Card Footer';
-        footerImg.className = 'bingo-footer';
-        cardSection.appendChild(footerImg);
-      }
-      container.appendChild(cardSection);
+    // Set the main container class for style switching
+    var main = document.getElementById('bingo-main');
+    if (main) {
+      main.className = style;
     }
-    // Insert container just after the optionsDiv
-    optionsDiv.parentNode.insertBefore(container, optionsDiv.nextSibling);
+
+    // Fill in the bingo grid
+    const table = document.querySelector('.bingo-grid tbody');
+    if (!table) return;
+    table.innerHTML = '';
+    // Shuffle bingoText for the card
+    const phrases = [...bingoText];
+    for (let i = phrases.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [phrases[i], phrases[j]] = [phrases[j], phrases[i]];
+    }
+    let phraseIdx = 0;
+    for (let r = 0; r < bingoSize; r++) {
+      const tr = document.createElement('tr');
+      for (let c = 0; c < bingoSize; c++) {
+        const td = document.createElement('td');
+        td.className = 'bingo-square';
+        if (r === 2 && c === 2) {
+          const img = document.createElement('img');
+          img.src = '/assets/hammer-logo.png';
+          img.alt = 'Hammer Logo';
+          img.className = 'center-img';
+          td.appendChild(img);
+        } else {
+          td.textContent = phrases[phraseIdx++];
+        }
+        tr.appendChild(td);
+      }
+      table.appendChild(tr);
+    }
   }
 
   // Update card automatically when options change
@@ -283,8 +111,126 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   document.getElementById('printBingo').addEventListener('click', function() {
-    renderBingoCards();
-    window.print();
+    // Get options
+    var style = document.querySelector('input[name="cardStyle"]:checked').value;
+    var useLessInk = style === 'useLessInk';
+    var blackWhite = style === 'blackWhite';
+    var fullColor = style === 'fullColor';
+    var numCards = Math.max(1, Math.min(40, parseInt(document.getElementById('numCards').value) || 1));
+
+    // Prepare bingo cards HTML
+    var cardsHtml = '';
+    for (var cardIdx = 0; cardIdx < numCards; cardIdx++) {
+      // Shuffle bingoText for each card
+      var phrases = bingoText.slice();
+      for (var i = phrases.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = phrases[i];
+        phrases[i] = phrases[j];
+        phrases[j] = temp;
+      }
+      // Build squares
+      var squares = [];
+      var phraseIdx = 0;
+      for (var r = 0; r < bingoSize; r++) {
+        squares[r] = [];
+        for (var c = 0; c < bingoSize; c++) {
+          if (r === 2 && c === 2) {
+            squares[r][c] = { type: 'center', img: '/assets/hammer-logo.png', alt: 'Hammer Logo' };
+          } else {
+            squares[r][c] = { type: 'text', text: phrases[phraseIdx++] };
+          }
+        }
+      }
+      // Card HTML
+      var cardHtml = '';
+      cardHtml += '<section class="bingo-card' + (useLessInk ? '' : ' full-bg') + ' print-card" aria-label="Bingo Card">';
+      // Letters background SVG
+      if (!useLessInk && !blackWhite) {
+        cardHtml += '<img src="' + (fullColor ? bingo_letters_bgs : bingo_letters_printer_friendly) + '" alt="Bingo Letters Background" class="bingo-letters-bg">';
+      }
+      // Bingo title
+      cardHtml += '<img src="' + bingo_title + '" alt="Workplace AI Implementation Bingo" class="bingo-title">';
+      // Bingo grid
+      cardHtml += '<table role="grid" aria-label="Bingo Grid" class="bingo-grid">';
+      for (var rr = 0; rr < bingoSize; rr++) {
+        cardHtml += '<tr>';
+        for (var cc = 0; cc < bingoSize; cc++) {
+          cardHtml += '<td class="bingo-square">';
+          if (squares[rr][cc].type === 'center') {
+            cardHtml += '<img src="' + squares[rr][cc].img + '" alt="' + squares[rr][cc].alt + '" class="center-img">';
+          } else {
+            cardHtml += squares[rr][cc].text;
+          }
+          cardHtml += '</td>';
+        }
+        cardHtml += '</tr>';
+      }
+      cardHtml += '</table>';
+      // Footer
+      if (!useLessInk) {
+        cardHtml += '<img src="' + bingo_footer + '" alt="Bingo Card Footer" class="bingo-footer">';
+      }
+      cardHtml += '</section>';
+      cardsHtml += cardHtml;
+    }
+
+    // Print window HTML and styles
+    var printWindow = window.open('', '_blank');
+    var printStyles = `
+      <style>
+      body { background: #fff !important; margin: 0; padding: 0; }
+      .print-cards-container { width: 100vw; min-height: 100vh; }
+      .print-page { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 24pt 0; page-break-after: always; }
+      .print-card-outer { width: 468pt; height: 324pt; display: flex; justify-content: center; align-items: center; margin: 12pt 0; position: relative; overflow: visible; }
+      .print-card {
+        width: 324pt; height: 468pt;
+        box-sizing: border-box;
+        border: 2pt solid #222;
+        border-radius: 12pt;
+        overflow: visible;
+        margin: 0;
+        position: absolute;
+        left: 0; top: 0;
+        background: #fff;
+        page-break-inside: avoid;
+        transform-origin: center center;
+        display: block;
+      }
+      .bingo-title { display: block; margin: 18pt auto 8pt auto; width: 90%; height: auto; z-index: 3; }
+      .bingo-letters-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100pt; z-index: 2; }
+      .bingo-footer { width: 100%; height: 32pt; position: absolute; bottom: 0; left: 0; z-index: 6; }
+      .bingo-grid { width: 95%; margin: 0 30pt; background: transparent; border-collapse: collapse; z-index: 4; }
+      .bingo-square { width: 64pt; height: 64pt; background: #fff; border: 1.5pt solid #222; text-align: center; vertical-align: middle; font-size: 10pt; font-family: Inconsolata, Arial, sans-serif; padding: 0 6pt; overflow-wrap: break-word; position: relative; z-index: 5; box-sizing: border-box; word-break: break-word; white-space: normal; }
+      .center-img { width: 36pt; height: 36pt; display: block; margin: 0 auto; }
+      @media print {
+        body { background: #fff !important; }
+        .print-cards-container { page-break-inside: avoid; }
+        .print-page { page-break-after: always; }
+        .print-card { page-break-inside: avoid; }
+      }
+      </style>
+    `;
+
+    // Layout: 2 cards per page, each rotated 90deg
+    var containerHtml = '<div class="print-cards-container">';
+    var cardSections = cardsHtml.split('</section>');
+    for (var i = 0; i < numCards; i += 2) {
+      containerHtml += '<div class="print-page">';
+      // Top card
+      containerHtml += '<div class="print-card-outer"><div class="print-card">' + cardSections[i].replace('<section', '<section').replace('</section>', '') + '</section></div></div>';
+      // Bottom card (if exists)
+      if (i + 1 < numCards) {
+        containerHtml += '<div class="print-card-outer"><div class="print-card">' + cardSections[i + 1].replace('<section', '<section').replace('</section>', '') + '</section></div></div>';
+      }
+      containerHtml += '</div>';
+    }
+    containerHtml += '</div>';
+
+    printWindow.document.write('<!DOCTYPE html><html><head><title>Print Bingo Cards</title>' + printStyles + '</head><body>' + containerHtml + '</body></html>');
+    printWindow.document.close();
+    printWindow.focus();
+    setTimeout(function() { printWindow.print(); }, 500);
   });
   renderBingoCards();
 });
