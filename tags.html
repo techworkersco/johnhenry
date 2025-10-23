@@ -2,11 +2,11 @@
 layout: default
 permalink: /tags/
 ---
-
+<a id="show-all-tags" href="#"><div>Show All Tags</div></a>
 <ul class="tags-list">
-    {% for tag in site.tags %}
+    {% for tag in site.tags reversed %}
     <li id="{{ tag[0] }}">
-        <b>{{ tag[0] }}</b>
+        <h3>{{ tag[0] }}</h3>
         <br>
         {% for post in tag[1] %}
         {{ post.date | date:"%Y-%m-%d" }} &raquo; <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
@@ -16,8 +16,9 @@ permalink: /tags/
     <br>
     {% endfor %}
     <br>
-    <li id="resources"><b>Resources</b><br>
-        {% for resource in site.resources %}
+    <li id="resources">
+        <h2>Resources</h2>
+        {% for resource in site.resources reversed %}
         {% if resource.tags contains "resources" %}
         {{ resource.date | date:"%Y-%m-%d" }} &raquo; <a href="{{ site.baseurl }}{{ resource.url }}">{{ resource.title
             }}</a>
@@ -27,8 +28,8 @@ permalink: /tags/
         <br>
     </li>
     <li id="articles">
-        <b>Articles</b><br>
-        {% for tag in site.tags %}
+        <h2>Articles</h2>
+        {% for tag in site.tags reversed %}
         <section id="{{ tag[0] }}">
             <b>{{ tag[0] }}</b>
             <br>
@@ -47,12 +48,16 @@ permalink: /tags/
     function showTagSection() {
         var hash = window.location.hash.replace('#', ''); // Get the fragment after '#'
         var sections = document.querySelectorAll('li[id]'); // All tag sections (li elements with id)
+        var showAllTagsLink = document.getElementById('show-all-tags'); // When url hash, show this to enable viewing all tags
 
         if (!hash) {
-            // If no hash, show only 'articles' and 'resources', hide all other tag sections
+            // If no hash:
+            // Hide the "All Tags" link
+            showAllTagsLink.classList.remove('visible');
+            // Show only 'articles' and 'resources', hide all other tag sections
             sections.forEach(function (section) {
                 if (section.id === 'articles' || section.id === 'resources') {
-                    section.style.display = '';
+                    section.classList.add('visible');
                     // Show any sibling content (e.g., <br>) after this section
                     var next = section.nextElementSibling;
                     while (next && next.tagName !== 'LI') {
@@ -60,7 +65,7 @@ permalink: /tags/
                         next = next.nextElementSibling;
                     }
                 } else {
-                    section.style.display = 'none';
+                    section.classList.remove('visible');
                     // Hide any sibling content after this section
                     var next = section.nextElementSibling;
                     while (next && next.tagName !== 'LI') {
@@ -71,17 +76,20 @@ permalink: /tags/
             });
             return;
         }
-        // If there is a hash, show only the matching section, hide all others
+        // If there is a hash:
+        // Show the "All Tags" link
+        showAllTagsLink.classList.add('visible');
+        // Show only the matching section, hide all others
         sections.forEach(function (section) {
             if (section.id !== hash && hash) {
-                section.style.display = 'none';
+                section.classList.remove('visible');
                 var next = section.nextElementSibling;
                 while (next && next.tagName !== 'LI') {
                     next.style.display = 'none';
                     next = next.nextElementSibling;
                 }
             } else {
-                section.style.display = '';
+                section.classList.add('visible');
                 var next = section.nextElementSibling;
                 while (next && next.tagName !== 'LI') {
                     next.style.display = '';
@@ -91,8 +99,14 @@ permalink: /tags/
         });
     }
 
-    // Run on initial page load
-    document.addEventListener("DOMContentLoaded", showTagSection);
-    // Run whenever the hash changes (user navigates to a different tag)
+    // Show all tags when the link is clicked, without redirect
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById('show-all-tags').addEventListener('click', function(e) {
+            e.preventDefault();
+            history.pushState(null, '', window.location.pathname);
+            showTagSection();
+        });
+        showTagSection();
+    });
     window.addEventListener("hashchange", showTagSection);
 </script>

@@ -1,4 +1,4 @@
----
+--- 
 ---
 
 /* Bingo Card Generator Styles */
@@ -32,6 +32,7 @@
 .bingo-card.full-bg {
   background: url('/assets/bingo-assets/bingo-bg.svg') center/cover;
 }
+
 .hide-bg .bingo-card.full-bg {
   background: white !important;
 }
@@ -70,6 +71,7 @@
   }
 
 }
+
 .blackWhite .bingo-letters-container {
   #bingo-letters-bg-svg {
     fill: white;
@@ -82,6 +84,7 @@
     stroke: black;
     stroke-width: 1px;
   }
+
   #bingo-letters-bg-svg {
     fill: none;
   }
@@ -140,6 +143,7 @@
   body {
     background: #fff !important;
   }
+
   .bingo-cards-container,
   .bingo-card,
   .print-cards-container,
@@ -147,6 +151,7 @@
   .bingo-card {
     page-break-inside: avoid;
   }
+
   .print-page {
     page-break-after: always;
   }
@@ -158,10 +163,12 @@
     margin: 0;
     padding: 0;
   }
+
   .print-cards-container {
     width: 100vw;
     min-height: 100vh;
   }
+
   .print-page {
     display: flex;
     flex-direction: column;
@@ -170,10 +177,17 @@
     padding: 0;
     page-break-after: always;
     gap: 16pt;
+
+    &:not(:first-child) {
+      margin-top: 116pt;
+    }
   }
+
   .print-card-rotator {
-    width: 468pt; /* 6.5in * 72pt/in */
-    height: 324pt; /* 4.5in * 72pt/in */
+    width: 468pt;
+    /* 6.5in * 72pt/in */
+    height: 324pt;
+    /* 4.5in * 72pt/in */
     position: relative;
     display: flex;
     justify-content: center;
@@ -182,8 +196,10 @@
   }
 
   .bingo-card {
-    width: 324pt !important;  /* 4.5in */
-    height: 468pt !important; /* 6.5in */
+    width: 324pt !important;
+    /* 4.5in */
+    height: 468pt !important;
+    /* 6.5in */
     box-sizing: border-box;
     border: 2pt solid #222;
     border-radius: 0 !important;
@@ -200,29 +216,34 @@
     transform: rotate(90deg) translateY(-468pt);
     transform-origin: left top;
   }
+
   .print-card-rotator:nth-child(even) {
     margin-top: -100pt;
 
     .bingo-card {
-          transform: rotate(90deg) translateY(-468pt) translateX(100pt);
+      transform: rotate(90deg) translateY(-468pt) translateX(100pt);
     }
   }
+
   .bingo-title {
     margin: 12pt 0 3pt 0 !important;
     width: 95% !important;
     font-size: 28pt !important;
     text-align: center;
   }
+
   .bingo-letters-container {
     width: 100% !important;
     height: 48pt !important;
     margin: 0 !important;
     padding: 0 !important;
   }
+
   .bingo-letters-bg,
   .bingo-letters-bg-color {
     height: 48pt !important;
   }
+
   .bingo-footer {
     width: 100% !important;
     height: 18pt !important;
@@ -231,9 +252,11 @@
     left: 0;
     z-index: 6;
   }
+
   .bingo-grid {
     margin: 8pt 8pt 0 !important;
   }
+
   .bingo-square {
     width: 20% !important;
     height: 68.6pt !important;
@@ -246,11 +269,13 @@
     width: 110%;
     margin: 0 0 0 -5%;
   }
+
   .bingo-card.full-bg {
     background: url('/assets/bingo-assets/bingo-bg.svg') center/cover !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
+
   .hide-bg .bingo-card.full-bg {
     background: #fff !important;
   }

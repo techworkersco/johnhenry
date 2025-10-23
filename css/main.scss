@@ -4,7 +4,7 @@
 
 $accent: #4BAEA0;
 
-$max-width: 1100px;
+$max-width: 1130px;
 $med-width: 600px;
 $small-width: 480px;
 
@@ -17,7 +17,9 @@ $small-width: 480px;
 .float-right {
     float: right;
 }
-
+.wrapper {
+    margin: 0 30px;
+}
 .container {
     max-width: $max-width;
     margin: auto;
@@ -197,6 +199,12 @@ $small-width: 480px;
     }
 }
 
+.space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .lt650, .lt800 {
     display: none;
 }
@@ -205,6 +213,13 @@ $small-width: 480px;
 }
 
 @media (max-width: 1100px) {
+    .wrapper {
+        margin: 0;
+    }
+    .container {
+        max-width: 95%;
+    }
+
     .column {
         padding: 10px 20px;
     }
@@ -222,7 +237,6 @@ $small-width: 480px;
 /* Tablet */
 @media (max-width: 800px) {
     .container {
-        max-width: $med-width;
         transition: 0.3s ease all;
     }
     .navbar {

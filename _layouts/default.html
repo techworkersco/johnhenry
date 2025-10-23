@@ -2,16 +2,17 @@
 <html lang="en">
 
 {% include head.html %}
-<script src="{{ site.baseurl }}/assets/js/bingo.js"></script>
 <body>
-    <div class="container">
-        {% include navbar.html %}
-        <div class="page-title">
-            {{page.title}}
+    <div class="wrapper">
+        <div class="container">
+            {% include navbar.html %}
+            <div class="page-title">
+                {{page.title}}
+            </div>
+            <div class="content">
+                {{ content }}
+            </div>
+            {% include footer.html %}
         </div>
-        <div class="content">
-            {{ content }}
-        </div>
-        {% include footer.html %}
     </div>
 </body>
