@@ -27,8 +27,8 @@ $accent: #4BAEA0;
   position: relative;
   border: 1px solid $accent;
   border-radius: 6px;
-  padding: 1rem 25px;
-  margin: 10px 5px 0;
+  padding: 1rem 20px;
+  margin: 10px 0 0;
   max-height: 300px;
   overflow: hidden;
 
@@ -82,6 +82,10 @@ $accent: #4BAEA0;
   }
 }
 
+.see-all h6 {
+  margin: 0;
+}
+
 /* Media queries for tablet and mobile */
 @media (max-width: 1200px) {
 
@@ -124,6 +128,7 @@ $accent: #4BAEA0;
 
   .highlighted-post {
     max-height: 400px;
+    margin: 10px 0px 0;
 
     .column:first-child, .column:last-child {
       width: 100%;

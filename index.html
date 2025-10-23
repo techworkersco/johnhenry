@@ -5,7 +5,15 @@ subtitle: Frustrated by your employer's generative AI policies? We're here to he
 ---
 <div class="content">
     <div class="row lt800">
-        <div class="column column-header">Latest Articles<hr /></div>
+        <div class="column column-header">
+            <div class="space-between">
+                <span>Latest Articles</span>
+                <a class="see-all" href="{{ site.url }}{{ site.baseurl}}/tags/#articles">
+                    <h6>All Articles ></h6>
+                </a>
+            </div>
+            <hr />
+        </div>
     </div>
     <div class="row lt800">
         {% for post in site.posts limit:2 %}
@@ -31,8 +39,24 @@ subtitle: Frustrated by your employer's generative AI policies? We're here to he
         {% endfor %}
     </div>
     <div class="row">
-        <div class="column column-header resources">Resources<hr /></div>
-        <div class="column column-header articles gt800">Articles<hr /></div>
+        <div class="column column-header resources">
+            <div class="space-between">
+                <span>Resources</span>
+                <a class="see-all" href="{{ site.url }}{{ site.baseurl}}/tags/#resources">
+                    <h6>All Resources ></h6>
+                </a>
+            </div>
+            <hr />
+        </div>
+        <div class="column column-header articles gt800">
+            <div class="space-between">
+                <span>Articles</span>
+                <!-- <a class="see-all" href="{{ site.url }}{{ site.baseurl}}/tags/#articles">
+                    <h6>All Articles ></h6>
+                </a> -->
+            </div>
+            <hr />
+        </div>
     </div>
     <div class="row">
         <div class="column resources">
