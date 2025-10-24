@@ -39,7 +39,7 @@ There's new news about AI every day, almost too much, and much of it fluff, hype
 * [AI, algorithmic and automation harms taxonomy](https://www.aiaaic.org/projects/ai-algorithmic-automation-harms-taxonomy)
 * [AIAAIC Repository of Incidents and Controversies](https://www.aiaaic.org/aiaaic-repository)
 
-### Organizing Trainings
+### Organizing Trainings and Support
 * [Emergency Workplace Organizing Committee](https://workerorganizing.org/training/)
 * [Labor Notes](https://labornotes.org/events)
 * [Code-CWA](https://code-cwa.org/upcoming-trainings)
