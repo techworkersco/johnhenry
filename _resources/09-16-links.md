@@ -59,7 +59,7 @@ There's new news about AI every day, almost too much, and much of it fluff, hype
 * [Artificial Intelligence as a Union Buster](https://prospect.org/labor/2023-09-07-artificial-intelligence-union-buster-neda/)
 * [What Happens After A.I. Destroys College
   Writing?](https://www.newyorker.com/magazine/2025/07/07/the-end-of-the-english-paper)
-  *[ Study finds AI tools made open source software developers 19 percent slower ](https://arstechnica.com/ai/2025/07/study-finds-ai-tools-made-open-source-software-developers-19-percent-slower/)
+* [ Study finds AI tools made open source software developers 19 percent slower ](https://arstechnica.com/ai/2025/07/study-finds-ai-tools-made-open-source-software-developers-19-percent-slower/)
 * [National Nurses United survey finds A.I. technology degrades and undermines patient safety](https://www.nationalnursesunited.org/press/national-nurses-united-survey-finds-ai-technology-undermines-patient-safety)
 * [Seismic Report reveals public souring on AI](https://report2025.seismic.org/)
 * [Present Tense Technology - how labor has responded to automation in the past](https://democracyjournalarchive.wordpress.com/wp-content/uploads/2015/06/noble_present-tense-technology_-part-2-democracy-3-2_-may-1983.pdf)
