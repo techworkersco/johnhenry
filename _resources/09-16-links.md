@@ -31,7 +31,8 @@ There's new news about AI every day, almost too much, and much of it fluff, hype
 
 ### Allied Campaigns
 
-* [Amazon Employees for Climate Justice Employee Open Letter](https://www.amazonclimatejustice.org/open-letter)x
+* [Amazon Employees for Climate Justice Employee Open Letter](https://www.amazonclimatejustice.org/open-letter)
+* [NewsGuild-CWA's News Not Slop](https://www.newsnotslop.org/)
 
 ### Research Resources
 * [TUC generative AI policy toolkit](https://www.tuc.org.uk/research-analysis/reports/tuc-generative-ai-policy-toolkit)
